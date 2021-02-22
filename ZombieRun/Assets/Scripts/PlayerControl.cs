@@ -36,6 +36,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (other.gameObject.name == "EndPos")
         {
+            //TODO why does this have to be static?
             GameManager.AdvanceCurrentLevel();
         }
     }
