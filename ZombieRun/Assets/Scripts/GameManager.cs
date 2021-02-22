@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
 
     private static int _currentLevel;
+    private const int MAX_LEVEL = 2;
     
     const string DIR_LOGS = "/Logs";
     private const string FILE_LEVEL = DIR_LOGS + "/level.txt";
@@ -63,11 +64,20 @@ public class GameManager : MonoBehaviour
 
     public static void AdvanceCurrentLevel()
     {
-        //load next scene
-        SceneManager.LoadScene(++_currentLevel);
+        //advance only if not on the last level
+        if (_currentLevel < MAX_LEVEL)
+        {
+            //load next scene
+            SceneManager.LoadScene(++_currentLevel);
         
-        //update save file to next level
-        File.WriteAllText(FILE_PATH_LEVEL, _currentLevel + "");
-        Debug.Log("FILE UPDATED");
+            //update save file to next level
+            File.WriteAllText(FILE_PATH_LEVEL, _currentLevel + "");
+            Debug.Log("FILE UPDATED");
+        }
+        else
+        {
+            Debug.Log("YOU WIN!");
+        }
+        
     }
 }
